@@ -1,9 +1,9 @@
 import React from "react"
 
-const OddMovie = () => {
+const ListActor = () => {
   return (
     <div></div>
   )
 }
 
-export default OddMovie;
+export default ListActor;
