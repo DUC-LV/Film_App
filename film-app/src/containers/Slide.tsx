@@ -2,44 +2,54 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 export interface DataSlider {
     image?:string,
-    name?:string,
-    time?:string,
+    id?:any
+    filmName?:string
 }
-interface DataSliderTop {
-    dataSliderTop?:DataSlider[],
-    title?:string,
+interface DataSlide {
+    dataSlide?:DataSlider[]
 }
-const Slide = (props:DataSliderTop) => {
-    const { dataSliderTop, title } = props;
+const Slide = (props:DataSlide) => {
+    const { dataSlide } = props;
     const settings = {
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 5000,
         pauseOnHover: true,
         speed: 2000,
-        centerMode: true,
+     //    centerMode: true,
     };
     return(
+        <>
         <div className = "container">
-            <h2 className = "title">{title}</h2>
-                <Slider {...settings}>
-                    {dataSliderTop?.map((item:any,index) => {
+            <Slider {...settings}>
+                    {dataSlide?.map((item:any,index) => {
                         return (
-                            <div className="movieItem" key={index}>
-                                <img src={item.image} className = "img"></img>
-                                {/* <p className = "movieName">{item.name}</p> */}
-                            </div>
+                            <Link
+                                href={{
+                                pathname: `/movie` ,
+                                query: { id:item.id },
+                                }}
+                                key={index}
+                            >
+                                <div className="movieItem" >
+                                    <img src={item.image} className = "img"></img>
+                                    <p className = "movieName">{item.filmName}</p>
+                                </div>
+                            </Link>
+                            
                         )
                     })}
-                </Slider>
-                <style jsx>{`
+            </Slider>
+            <style jsx>{`
                     .container{
                         position:relative;
-                        right:815px;
+                        right:800px;
+                        top:50px;
                         padding: 20px 20px 0;
                         height:100%;
                         width:150%;
@@ -48,15 +58,37 @@ const Slide = (props:DataSliderTop) => {
                         height:100%;
                         width:100%;
                         position:relative;
-                        border-radius:6px;
                         padding: 6px
                     }
-                    .movieItem{
-                        height:345px;
+                    .movieName{
+                        color:white;
                         cursor:pointer;
                     }
-                `}</style>
+                    .movieItem{
+                        height:400px;
+                        cursor:pointer;
+                        outline:none;
+                    }
+                    .img:active{
+                        border:2px solid grey;
+                    }
+                    .movieItem:hover  {
+                        animation:zom 0.5s ease 1 forwards;
+                        height:400px;
+                        width:400px;
+                        border:2px solid white;
+                    }
+                    @keyframes zom {
+                        50%{
+                            transform:scale(1,2)
+                        }
+                        100%{
+                            transform:scale(1)
+                        }
+                    }
+            `}</style>
         </div>
+        </>
     );
 }
 export default Slide;
