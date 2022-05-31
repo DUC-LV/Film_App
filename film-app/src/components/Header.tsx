@@ -3,14 +3,18 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useState,useCallback } from "react";
 import { AiOutlineSearch } from 'react-icons/ai'
+import { convertSlug } from "../untils";
 export const Header = () => {
      const router = useRouter();
-     const [searchTxt, setSearchTxt] = useState('');
+     const [searchTxt, setSearchTxt] = useState("");
      const handleSearch = useCallback(() => {
           if (!searchTxt) return;
-          router.push(`${router.pathname}?${searchTxt}`, `${router.pathname}?${searchTxt}`, { shallow: true });
-          // router.push(`/search?${searchTxt}`, `/search?${searchTxt}`);
-      }, [searchTxt]);
+          router.push({
+               pathname : `/movie/movies`,
+               query:{query:convertSlug(searchTxt)}
+          })
+     }, [searchTxt]);
+     
      return(
           <div className="container">
                <div className="head">

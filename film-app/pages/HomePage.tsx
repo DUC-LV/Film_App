@@ -4,6 +4,7 @@ import Slide from "../src/containers/Slide";
 import SlideShow from "../src/containers/SlideShow";
 import getCartoonMovie from "../src/service/getCartoonMovie";
 import getMovieTheaters from "../src/service/getMovieTheaters";
+import getNowPlaying from "../src/service/getNowPlaying";
 import getOtherMovie from "../src/service/getOtherMovie";
 import getPopularMovie from "../src/service/getPopularMovie";
 import getTopMovie from "../src/service/getTopMovie";
@@ -13,6 +14,7 @@ export const HomePage = () => {
      const [dataPopularMovie, getDataPopularMovie] = useState<any>();
      const [dataCartoonMovie, getDataCartoonMovie] = useState<any>();
      const [dataOtherMovie, getDataOtherMovie] = useState<any>();
+     const [dataNowPlaying, getDataNowPlaying] = useState<any>();
      useEffect(() => {
           getPopularMovie()
                .then(res => {
@@ -34,6 +36,10 @@ export const HomePage = () => {
                .then(res => {
                     getDataOtherMovie(res.data.results)
                })
+          getNowPlaying()
+               .then(res => {
+                    getDataNowPlaying(res.data.results)
+               })
      },[])
      return(
           <div>
@@ -42,16 +48,28 @@ export const HomePage = () => {
                          return {
                               image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
                               id:item.id,
-                              
+                              filmName:item.original_title,
                          }
                     })}
+               />
+               <SlideShow 
+                    dataSlideShow = {dataNowPlaying?.map((item:any) => {
+                         return {
+                              image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                              filmName:item.original_title,
+                              id:item.id
+                         }
+                    })}
+                    title = "Trực Tiếp"
+                    post = "/"
+                    
                />
                <SlideShow 
                     dataSlideShow = {dataMovieTheaters?.map((item:any) => {
                          return {
                               image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
                               filmName:item.original_title,
-                              id:item.id,
+                              id:item.id
                          }
                     })}
                     title = "Phim Chiếu Rạp"
@@ -63,7 +81,7 @@ export const HomePage = () => {
                          return {
                               image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
                               filmName:item.original_title,
-                              id:item.id,
+                              id:item.id
                          }
                     })}
                     title = "Phim Thịnh Hành"
@@ -74,7 +92,7 @@ export const HomePage = () => {
                          return {
                               image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
                               filmName:item.original_title,
-                              id:item.id,
+                              id:item.id
                          }
                     })}
                     title = "Phim Hoạt Hình"
@@ -85,7 +103,7 @@ export const HomePage = () => {
                          return {
                               image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
                               filmName:item.original_title,
-                              id:item.id,
+                              id:item.id
                          }
                     })}
                     title = "Phim Khác"

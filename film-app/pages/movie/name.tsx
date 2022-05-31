@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";    
 import { useRouter } from "next/router"
-import getDetail from "../src/service/getDetail";
-const movie = () => {
+import getDetail from "../../src/service/getDetail";
+const name = () => {
     const router = useRouter()
     const {
-        query: { id },
+        query: { query },
     } = router
      // console.log(id)
     const [filmInformation, setFilmInformation] = useState<any>({})
         useEffect(() => {
-            if(id){
-                getDetail(id)
+            if(query){
+                getDetail(query)
                 .then(res => {
                     setFilmInformation(res.data)
                 })
             }
-        },[id])
+        },[query])
      // console.log(filmInformation.backdrop_path)
         return(
             <div className="container">
@@ -71,4 +71,4 @@ const movie = () => {
         </div>
     );
 }
-export default movie;
+export default name;

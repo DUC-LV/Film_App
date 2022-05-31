@@ -2,7 +2,8 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { convertSlug } from "../untils";
 export interface DataSlider {
     image?:string,
     id?:any
@@ -23,25 +24,23 @@ const Slide = (props:DataSlide) => {
         speed: 2000,
      //    centerMode: true,
     };
+    const router = useRouter()
     return(
         <>
         <div className = "container">
             <Slider {...settings}>
                     {dataSlide?.map((item:any,index) => {
                         return (
-                            <Link
-                                href={{
-                                pathname: `/movie` ,
-                                query: { id:item.id },
-                                }}
-                                key={index}
-                            >
-                                <div className="movieItem" >
-                                    <img src={item.image} className = "img"></img>
-                                    <p className = "movieName">{item.filmName}</p>
-                                </div>
-                            </Link>
                             
+                            <div className="movieItem" key={index} onClick = {() => {
+                                router.push({
+                                    pathname: `/movie/name`,
+                                    query:{"":convertSlug(item?.filmName),query:item.id}
+                                })
+                        }} >
+                                <img src={item.image} className = "img"></img>
+                                {/* <p className = "movieName">{item.filmName}</p> */}
+                            </div>
                         )
                     })}
             </Slider>

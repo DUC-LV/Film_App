@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { VscTriangleRight } from 'react-icons/vsc'
 import Link from "next/link";
 import { useRouter } from 'next/router'
+import { convertSlug } from "../untils";
+
 export interface DataSliderShow {
     image?:string,
     filmName?:string
@@ -14,7 +16,6 @@ interface DataSlideShow {
     dataSlideShow?:DataSliderShow[]
     title?:string
     post?:any
-    
 }
 const SlideShow = (props:DataSlideShow) => {
     const { dataSlideShow, title, post } = props;
@@ -29,32 +30,29 @@ const SlideShow = (props:DataSlideShow) => {
         <div>
         <h2 className="tooltip">{title}
             <Link href={`${post}`}>
-                <span className="tooltiptext">Xem tất cả <VscTriangleRight style={{
+                    <span className="tooltiptext">Xem tất cả <VscTriangleRight style={{
                         "position":"relative",
                         "left":"80px",
                         "bottom":"15px"
-                }} /></span>
+                    }} /></span>
             </Link>
         </h2>
         <div className="container">
             <Slider {...settings}>
-                {dataSlideShow?.map((item:any,index) => {
+                    {dataSlideShow?.map((item:any,index) => {
                         return (
-                            <Link
-                                href={{
-                                pathname: `/movie` ,
-                                query: { id:item.id },
-                                }}
-                                key={index}
-                            >
-                                <div className="movieItem" >
-                                    <img src={item.image} className = "img"></img>
-                                    <div className="nameFilm ">{item.filmName}</div>
+                                <div className="movieItem" key={index} onClick = {() => {
+                                        router.push({
+                                            pathname: `/movie/name`,
+                                            query:{"":convertSlug(item.filmName),query:item.id}
+                                        })
+                                        // router.push(`/movie?${item.id}`, `/movie?${item.filmName}`, { shallow: true });
+                                }} >
+                                        <img src={item.image} className = "img"></img>
+                                        {/* <div className="nameFilm ">{item.filmName}</div> */}
                                 </div>
-                            </Link>
-                            
-                    )
-                })}
+                        )
+                    })}
             </Slider>
         </div>
         <style jsx>{`
@@ -64,13 +62,38 @@ const SlideShow = (props:DataSlideShow) => {
                         width:95%;
                         left:30px;
                     }
+                    .b{
+                        color:white;
+                    }
+                    .nameFilm {
+                        color:white;
+                        text-align:center; 
+                        margin-top:5px;
+                        font-family: 'Poppins', sans-serif;
+                    }
                     .tooltip{
                         color:white;
                         margin-left:30px;
-                        margin-top:120px;
+                        margin-top:80px;
                         cursor:pointer;
-                        position: relative;
-                        display: inline-block;
+                    }
+                    .tooltiptext{
+                        font-size:15px;
+                        margin-top:8px;
+                        color:grey;
+                        display:inline-block;
+                        position:relative;
+                    }
+                    .tooltip .tooltiptext {
+                        visibility: hidden;
+                        width: 120px;
+                        padding-left:30px;
+                         /* Position the tooltip */
+                        position: absolute;
+                        z-index: 1;
+                    }
+                    .tooltip:hover .tooltiptext {
+                        visibility: visible;
                     }
                     .img{
                         height:100%;
@@ -90,6 +113,7 @@ const SlideShow = (props:DataSlideShow) => {
                         animation:zom 0.5s ease 1 forwards;
                         height:350px;
                         border:2px solid white;
+                         {/* animation-duration: 2s; */}
                     }
                     @keyframes zom {
                         50%{
@@ -98,31 +122,6 @@ const SlideShow = (props:DataSlideShow) => {
                         100%{
                             transform:scale(1)
                         }
-                    }
-                    
-                    .nameFilm {
-                        color:white;
-                        text-align:center; 
-                        margin-top:5px;
-                    }
-                    .tooltiptext{
-                        font-size:15px;
-                        margin-top:8px;
-                        color:grey;
-                    }
-                    .tooltip .tooltiptext {
-                        visibility: hidden;
-                        width: 120px;
-                        color: white;
-                        border-radius: 6px;
-                        padding-left:30px;
-
-                         /* Position the tooltip */
-                        position: absolute;
-                        z-index: 1;
-                    }
-                    .tooltip:hover .tooltiptext {
-                        visibility: visible;
                     }
             `}</style>
         </div>
