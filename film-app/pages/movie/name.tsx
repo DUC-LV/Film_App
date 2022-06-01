@@ -29,43 +29,54 @@ const name = () => {
                     <button className="button2">Tải Phim</button>
                 </div>
                 <div className="container-right">
-                    <h3 className="nameFilm">{filmInformation?.original_title}</h3>
-                    <p className="review">Review: {filmInformation?.overview}</p>
-                    <p className="date">Ngày Phát Hành:{filmInformation?.release_date}</p>
-                    <p className="date">Nhà Phát Hành:{filmInformation?.production_companies?.[0]?.name}</p>
-                    <img  src = {`https://image.tmdb.org/t/p/w500` + filmInformation?.production_companies?.[0]?.logo_path} className = "logo"/>
-                    <p className="date">Quốc Gia:{filmInformation?.production_countries?.[0]?.name}</p>
+                    <h3 className = "nameFilm">Tên Phim: {filmInformation.original_title}</h3>
+                    <h3 className = "country">Quốc Gia: {filmInformation.original_language}</h3>
+                    <h3 className = "review">Tóm tắt: {filmInformation.overview}</h3>
+                    <h3 className = "mark">Điểm: {filmInformation.vote_average}</h3>
+                    <h3 className = "date">Ngày Chiếu: {filmInformation.release_date}</h3>
+                    <h3 className = "view">View: {filmInformation.vote_count}</h3>
                 </div>
                 <style jsx>{`
-                    .img{
-                        position:relative;
-                        right:380px;
+                    .container-left,.container-right{
+                        display:inline-block;
+                    }
+                    .container-left{
+                        position: relative;
+                        right:600px;
                         top:30px;
-                        border-radius:6px;
                     }
-                    .nameFilm,.date,.review{
-                        color:grey;
-                        text-align:center;
+                    .container-right{
+                        position: relative;
+                        left:830px;
+                        bottom:350px;
+                        font-size:18px;
                     }
-                    .button1{
-                        margin-left:650px;
+                    .nameFilm,.country,.mark,.date,.view,.review{
+                        color:white;
                     }
-                    .button2{
-                        margin-left:10px;
+                    .review{
+                        width: 500px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        line-height: 25px;
+                        -webkit-line-clamp: 3;
+                        height: 75px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
                     }
                     .button1,.button2{
                         height:30px;
                         width:100px;
                         border:none;
                         border-radius:6px;
-                        cursor:pointer;
+                        cursor: pointer;
                         outline:none;
                     }
-                    .logo{
-                        height:300px;
-                        width:300px;
-                        margin-left:610px;
-                        border-radius:10px;
+                    .button1{
+                        margin-left:170px;
+                    }
+                    .button2{
+                        margin-left:30px;
                     }
             `}</style>
         </div>
