@@ -32,28 +32,28 @@ export const Header = () => {
                               </li>
                               <li className = {router.pathname == '/MovieTheaters' ? 'items':'item'} >
                                    <Link href = {{
-                                        pathname : "/MovieTheaters",
+                                        pathname : "/movie-theaters",
                                         }}>
                                         Phim Chiếu Rạp
                                    </Link>
                               </li>
                               <li  className = {router.pathname == '/Cartoon' ? 'items':'item'} >
                                    <Link href = {{
-                                        pathname : "/Cartoon",
+                                        pathname : "/cartoon",
                                         }}>
                                         Phim Hoạt Hình
                                    </Link>
                               </li>
                               <li  className = {router.pathname == '/RankMovie' ? 'items':'item'} >
                                    <Link href = {{
-                                        pathname : "/RankMovie",
+                                        pathname : "/rank-movie",
                                         }}>
                                         Bảng Xếp Hạng
                                    </Link>
                               </li>
                               <li  className = {router.pathname == '/ListActor' ? 'items':'item'} >
                                    <Link href = {{
-                                        pathname : "/ListActor",
+                                        pathname : "/list-actor",
                                         }}>
                                         Diển Viên
                                    </Link>
@@ -73,7 +73,11 @@ export const Header = () => {
                          className = "button-body"
                          onClick={handleSearch}
                     ><AiOutlineSearch style={{"position":"relative","top":"3px"}} /></button>
-                    <button className="login">Đăng Nhập</button>
+                    <button className="login" onClick = {() => {
+                         router.push({
+                              pathname:"/login"
+                         })
+                    }}>Đăng Nhập</button>
                </div>
                <style jsx>{`
                     .container{

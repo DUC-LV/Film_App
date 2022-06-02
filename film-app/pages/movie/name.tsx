@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";    
 import { useRouter } from "next/router"
 import getDetail from "../../src/service/getDetail";
+import getCartoonMovie from "../../src/service/getCartoonMovie";
+import getMovieTheaters from "../../src/service/getMovieTheaters";
+import getNowPlaying from "../../src/service/getNowPlaying";
+import getOtherMovie from "../../src/service/getOtherMovie";
+import getPopularMovie from "../../src/service/getPopularMovie";
+import getTopMovie from "../../src/service/getTopMovie";
+import SlideShow from "../../src/containers/SlideShow";
 const name = () => {
     const router = useRouter()
     const {
@@ -17,6 +24,38 @@ const name = () => {
             }
         },[query])
      // console.log(filmInformation.backdrop_path)
+    const [dataTopMovie, setDataTopMovie] = useState<any>();
+    const [dataMovieTheaters, getDataMovieTheaters] = useState<any>();
+    const [dataPopularMovie, getDataPopularMovie] = useState<any>();
+    const [dataCartoonMovie, getDataCartoonMovie] = useState<any>();
+    const [dataOtherMovie, getDataOtherMovie] = useState<any>();
+    const [dataNowPlaying, getDataNowPlaying] = useState<any>();
+    useEffect(() => {
+        getPopularMovie()
+                .then(res => {
+                    getDataPopularMovie(res.data.results)
+                })
+        getTopMovie()
+                .then(res => {
+                    setDataTopMovie(res.data.results.slice(1,20))
+                })
+        getMovieTheaters()
+                .then(res => {
+                    getDataMovieTheaters(res.data.results)
+                })
+        getCartoonMovie()
+                .then(res => {
+                    getDataCartoonMovie(res.data.results)
+                })
+        getOtherMovie()
+                .then(res => {
+                    getDataOtherMovie(res.data.results)
+                })
+        getNowPlaying()
+                .then(res => {
+                    getDataNowPlaying(res.data.results)
+                })
+    },[])
         return(
             <div className="container">
                 <div className="container-left">
@@ -35,6 +74,66 @@ const name = () => {
                     <h3 className = "mark">Điểm: {filmInformation.vote_average}</h3>
                     <h3 className = "date">Ngày Chiếu: {filmInformation.release_date}</h3>
                     <h3 className = "view">View: {filmInformation.vote_count}</h3>
+                </div>
+                <div className = "slide">
+                    <h2 className = "title">Phim Khác</h2>
+                    <SlideShow 
+                        dataSlideShow = {dataNowPlaying?.map((item:any) => {
+                            return {
+                                image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                                filmName:item.original_title,
+                                id:item.id
+                            }
+                        })}
+                        title = ""
+                        post = "/"
+                        
+                    />
+                    <SlideShow 
+                        dataSlideShow = {dataMovieTheaters?.map((item:any) => {
+                            return {
+                                image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                                filmName:item.original_title,
+                                id:item.id
+                            }
+                        })}
+                        title = ""
+                        post = "/MovieTheaters"
+                        
+                    />
+                    <SlideShow 
+                        dataSlideShow = {dataPopularMovie?.map((item:any) => {
+                            return {
+                                image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                                filmName:item.original_title,
+                                id:item.id
+                            }
+                        })}
+                        title = ""
+                        post = "/"
+                    />
+                    <SlideShow 
+                        dataSlideShow = {dataCartoonMovie?.map((item:any) => {
+                            return {
+                                image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                                filmName:item.original_title,
+                                id:item.id
+                            }
+                        })}
+                        title = ""
+                        post = "/Cartoon"
+                    />
+                    <SlideShow 
+                        dataSlideShow = {dataOtherMovie?.map((item:any) => {
+                            return {
+                                image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                                filmName:item.original_title,
+                                id:item.id
+                            }
+                        })}
+                        title = ""
+                        post = "/"
+                    />
                 </div>
                 <style jsx>{`
                     .container-left,.container-right{
@@ -77,6 +176,17 @@ const name = () => {
                     }
                     .button2{
                         margin-left:30px;
+                    }
+                    .title{
+                        color:white;
+                        position: relative;
+                        margin-left:33px;
+                        position: relative;
+                        top:30px;
+                    }
+                    .slide{
+                        position: relative;
+                        bottom:300px;
                     }
             `}</style>
         </div>
