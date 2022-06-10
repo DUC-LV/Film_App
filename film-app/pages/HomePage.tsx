@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import LoadingMore from "../src/containers/LoadingMore";
 import Slide from "../src/containers/Slide";
 import SlideShow from "../src/containers/SlideShow";
 import getCartoonMovie from "../src/service/getCartoonMovie";
-import getMovieTheaters from "../src/service/getMovieTheaters";
+import getMovieTheater from "../src/service/getMovieTheater";
 import getNowPlaying from "../src/service/getNowPlaying";
 import getOtherMovie from "../src/service/getOtherMovie";
 import getPopularMovie from "../src/service/getPopularMovie";
@@ -24,10 +25,11 @@ export const HomePage = () => {
                .then(res => {
                     setDataTopMovie(res.data.results.slice(1,20))
                })
-          getMovieTheaters()
-               .then(res => {
-                    getDataMovieTheaters(res.data.results)
-               })
+          getMovieTheater.getAll().then(response => {
+               getDataMovieTheaters(response.data.results)
+               // getDataMovieTheaters(response.data.results)
+               console.log(response.data)
+          })
           getCartoonMovie()
                .then(res => {
                     getDataCartoonMovie(res.data.results)
@@ -73,7 +75,7 @@ export const HomePage = () => {
                          }
                     })}
                     title = "Phim Chiếu Rạp"
-                    post = "/MovieTheaters"
+                    post = "/movie-theaters"
                     
                />
                <SlideShow 
@@ -96,7 +98,7 @@ export const HomePage = () => {
                          }
                     })}
                     title = "Phim Hoạt Hình"
-                    post = "/Cartoon"
+                    post = "/cartoon"
                />
                <SlideShow 
                     dataSlideShow = {dataOtherMovie?.map((item:any) => {
@@ -109,6 +111,7 @@ export const HomePage = () => {
                     title = "Phim Khác"
                     post = "/"
                />
+               <LoadingMore />
           </div>
      );
 }

@@ -30,28 +30,28 @@ export const Header = () => {
                                         Trang Chủ
                                    </Link>
                               </li>
-                              <li className = {router.pathname == '/MovieTheaters' ? 'items':'item'} >
+                              <li className = {router.pathname == '/movie-theaters' ? 'items':'item'} >
                                    <Link href = {{
                                         pathname : "/movie-theaters",
                                         }}>
                                         Phim Chiếu Rạp
                                    </Link>
                               </li>
-                              <li  className = {router.pathname == '/Cartoon' ? 'items':'item'} >
+                              <li  className = {router.pathname == '/cartoon' ? 'items':'item'} >
                                    <Link href = {{
                                         pathname : "/cartoon",
                                         }}>
                                         Phim Hoạt Hình
                                    </Link>
                               </li>
-                              <li  className = {router.pathname == '/RankMovie' ? 'items':'item'} >
+                              <li  className = {router.pathname == '/rank-movie' ? 'items':'item'} >
                                    <Link href = {{
                                         pathname : "/rank-movie",
                                         }}>
                                         Bảng Xếp Hạng
                                    </Link>
                               </li>
-                              <li  className = {router.pathname == '/ListActor' ? 'items':'item'} >
+                              <li  className = {router.pathname == '/list-actor' ? 'items':'item'} >
                                    <Link href = {{
                                         pathname : "/list-actor",
                                         }}>

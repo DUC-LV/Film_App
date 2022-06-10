@@ -29,6 +29,7 @@ const SlideShow = (props:DataSlideShow) => {
     return(
         <div>
         <h2 className="tooltip">{title}
+        {/* bug */}
             <Link href={`${post}`}>
                     <span className="tooltiptext">Xem tất cả <VscTriangleRight style={{
                         "position":"relative",

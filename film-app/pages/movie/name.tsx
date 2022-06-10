@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import getDetail from "../../src/service/getDetail";
 import getCartoonMovie from "../../src/service/getCartoonMovie";
-import getMovieTheaters from "../../src/service/getMovieTheaters";
+import getMovieTheater from "../../src/service/getMovieTheater";
 import getNowPlaying from "../../src/service/getNowPlaying";
 import getOtherMovie from "../../src/service/getOtherMovie";
 import getPopularMovie from "../../src/service/getPopularMovie";
@@ -39,10 +39,9 @@ const name = () => {
                 .then(res => {
                     setDataTopMovie(res.data.results.slice(1,20))
                 })
-        getMovieTheaters()
-                .then(res => {
-                    getDataMovieTheaters(res.data.results)
-                })
+        getMovieTheater.getAll().then(response => {
+            getDataMovieTheaters(response.data.results)
+        })
         getCartoonMovie()
                 .then(res => {
                     getDataCartoonMovie(res.data.results)
