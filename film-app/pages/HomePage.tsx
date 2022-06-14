@@ -28,7 +28,7 @@ export const HomePage = () => {
           getMovieTheater.getAll().then(response => {
                getDataMovieTheaters(response.data.results)
                // getDataMovieTheaters(response.data.results)
-               console.log(response.data)
+               // console.log(response.data)
           })
           getCartoonMovie()
                .then(res => {
@@ -42,6 +42,7 @@ export const HomePage = () => {
                .then(res => {
                     getDataNowPlaying(res.data.results)
                })
+          
      },[])
      return(
           <div>
@@ -111,7 +112,15 @@ export const HomePage = () => {
                     title = "Phim Khác"
                     post = "/"
                />
-               <LoadingMore />
+               <LoadingMore 
+                    // dataLoading = {dataLoad?.map((item:any) => {
+                    //      return{
+                    //           image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
+                    //           filmName:item.original_title,
+                    //           id:item.id
+                    //      }
+                    // })}
+               />
           </div>
      );
 }

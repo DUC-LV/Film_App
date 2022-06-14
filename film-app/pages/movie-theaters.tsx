@@ -12,8 +12,16 @@ type Props = {
 }
 const MovieTheater = ({ data }:Props) => {
   console.log(data)
+  // var queries = [{
+  //   columns: 2,
+  //   query: 'min-width: 500px'
+  // }, {
+  //   columns: 3,
+  //   query: 'min-width: 1000px'
+  // }];
   return (
-    <div></div>
+    <div>
+    </div>
   )
 }
 
