@@ -9,6 +9,7 @@ import getNowPlaying from "../src/service/getNowPlaying";
 import getOtherMovie from "../src/service/getOtherMovie";
 import getPopularMovie from "../src/service/getPopularMovie";
 import getTopMovie from "../src/service/getTopMovie";
+import getLoadingMovieTheater from "../src/service/LoadingMore/getLoadingMovieTheater";
 export const HomePage = () => {
      const [dataTopMovie, setDataTopMovie] = useState<any>();
      const [dataMovieTheaters, getDataMovieTheaters] = useState<any>();
@@ -16,6 +17,7 @@ export const HomePage = () => {
      const [dataCartoonMovie, getDataCartoonMovie] = useState<any>();
      const [dataOtherMovie, getDataOtherMovie] = useState<any>();
      const [dataNowPlaying, getDataNowPlaying] = useState<any>();
+     const [dataLoadingMovieTheater, setDataLoadingMovieTheater] = useState<any>()
      useEffect(() => {
           getPopularMovie()
                .then(res => {
@@ -112,15 +114,18 @@ export const HomePage = () => {
                     title = "Phim Khác"
                     post = "/"
                />
-               <LoadingMore 
-                    // dataLoading = {dataLoad?.map((item:any) => {
-                    //      return{
+               {/* <LoadingMore
+                    // dataLoading = {dataLoadingMovieTheater?.map((item:any) => {
+                    //      return {
                     //           image:`https://image.tmdb.org/t/p/w500`+item.poster_path,
                     //           filmName:item.original_title,
                     //           id:item.id
                     //      }
                     // })}
-               />
+                    // title = ""
+                    // post = ""
+               /> */}
+               <LoadingMore />
           </div>
      );
 }
