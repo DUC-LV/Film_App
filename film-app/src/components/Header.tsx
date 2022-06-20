@@ -68,6 +68,11 @@ export const Header = () => {
                          placeholder="Tìm Kiếm "
                          value = {searchTxt}
                          onChange = {(e:any) => setSearchTxt(e.target.value)}
+                         onKeyPress = {event => {
+                              if(event.key === 'Enter'){
+                                   handleSearch()
+                              }
+                         }}
                     ></input>
                     <button
                          className = "button-body"
