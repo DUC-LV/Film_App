@@ -1,67 +1,85 @@
 import React from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick"
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { convertSlug } from "../untils";
 export interface DataSlider {
     image?:string,
-    id?:any
     filmName?:string
+    id?:any
 }
 interface DataSlide {
-    dataSlide?:DataSlider[]
+    dataSlide?:DataSlider[],
+    settingSlide?:any,
+    title?:string,
+    post?:any,
+    tooltip?:any,
+    icon?:any
 }
 const Slide = (props:DataSlide) => {
-    const { dataSlide } = props;
-    const settings = {
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        pauseOnHover: true,
-        speed: 2000,
-     //    centerMode: true,
-    };
-    const router = useRouter()
+    const { dataSlide, settingSlide, title, post, tooltip, icon } = props;
+    const router = useRouter();
     return(
-        <>
-        <div className = "container">
-            <Slider {...settings}>
-                    {dataSlide?.map((item:any,index) => {
-                        return (
-                            
-                            <div className="movieItem" key={index} onClick = {() => {
-                                router.push({
-                                    pathname: `/movie/name`,
-                                    query:{"":convertSlug(item?.filmName),query:item.id}
-                                })
-                        }} >
-                                <img src={item.image} className = "img"></img>
-                                {/* <p className = "movieName">{item.filmName}</p> */}
-                            </div>
+        <div>
+            <h2 className="tooltip">{title}
+                    <Link href={`${post}`}>
+                        <span className="tooltiptext">{tooltip} {icon}</span>
+                    </Link>
+            </h2>
+            <div className="container">
+                    <Slider {...settingSlide}>
+                        {dataSlide?.map((item:any,index) => {
+                            return (
+                                <div className="movieItem" key={index} onClick = {() => {
+                                        router.push({
+                                            pathname: `/movie/[slugMovie]`,
+                                            query:{"slugMovie":convertSlug(item.filmName),id:item.id}
+                                        })
+                                }} >
+                                        <img src={item.image} className = "img"></img>
+                                </div>
                         )
-                    })}
-            </Slider>
+                        })}
+                    </Slider>
+            </div>
             <style jsx>{`
                     .container{
-                        position:relative;
-                        right:800px;
-                        top:50px;
-                        padding: 20px 20px 0;
                         height:100%;
-                        width:150%;
+                        width:90%;
+                        margin-left:75px;
+                    }
+                    .tooltip{
+                        color:white;
+                        margin-left:93px;
+                        margin-top:80px;
+                        cursor:pointer;
+                    }
+                    .tooltiptext{
+                        font-size:15px;
+                        margin-top:8px;
+                        color:grey;
+                        display:inline-block;
+                        position:relative;
+                    }
+                    .tooltip .tooltiptext {
+                        visibility: hidden;
+                        width: 120px;
+                        padding-left:30px;
+                         /* Position the tooltip */
+                        position: absolute;
+                        z-index: 1;
+                    }
+                    .tooltip:hover .tooltiptext {
+                        visibility: visible;
                     }
                     .img{
                         height:100%;
                         width:100%;
                         position:relative;
-                        padding: 6px
-                    }
-                    .movieName{
-                        color:white;
-                        cursor:pointer;
+                        padding: 10px;
+                        border-radius:10px;
                     }
                     .movieItem{
                         height:400px;
@@ -87,7 +105,6 @@ const Slide = (props:DataSlide) => {
                     }
             `}</style>
         </div>
-        </>
-    );
+    )
 }
 export default Slide;

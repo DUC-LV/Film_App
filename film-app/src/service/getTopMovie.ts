@@ -1,6 +1,9 @@
-import axios from "axios";
+import instance from "../axiosClient";
 
-const getTopMovie = () => {
-     return axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=beb36572ce908c61fa2c0585f6e2ced8&language=en-US&page=2`)
+const getTopMovie = {
+     getAll(){
+          const url = `top_rated?language=en-US&page=2`
+          return instance.get(url)
+     }
 }
-export default getTopMovie;
+export default getTopMovie

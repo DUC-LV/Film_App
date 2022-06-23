@@ -1,9 +1,13 @@
-import React from "react"
-
-const Cartoon = () => {
-  return (
-    <div></div>
-  )
+import React, { useState, useEffect } from "react"
+import LoadingMoreMovie from "../src/containers/LoadingMoreMovie";
+const CarToon = () => {
+      return(
+            <div className="main">
+                  <LoadingMoreMovie 
+                        title="Phim Hoạt Hình"
+                        value={1}
+                  />
+            </div>
+      )
 }
-
-export default Cartoon;
+export default CarToon;
