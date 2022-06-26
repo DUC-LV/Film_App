@@ -77,12 +77,6 @@ console.log(a.getHours()+"/"+a.getMinutes())
                 .nameFilm,.review{
                     color: white;
                     font-size: 20x;
-                }
-                .country,.mark,.date,.view{
-                    color: grey;
-                    font-size: 16px;
-                }
-                .review{
                     width: 500px;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -92,6 +86,20 @@ console.log(a.getHours()+"/"+a.getMinutes())
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
                 }
+                .country,.mark,.date,.view{
+                    color: grey;
+                    font-size: 16px;
+                }
+                {/* .review{
+                    width: 500px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 25px;
+                    -webkit-line-clamp: 3;
+                    height: 75px;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                } */}
             `}</style>
         </div>
     )
