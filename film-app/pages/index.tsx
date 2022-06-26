@@ -17,7 +17,7 @@ type Props = {
 }
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const resPopularMovie =await getPopularMovie.getAll() 
-  const resMovieTheater = await getMovieTheater.getAll()
+  const resMovieTheater = await getMovieTheater.getAll(1)
   const resTopMovie = await getTopMovie.getAll()
   const resNowPlaying = await getNowPlaying.getAll()
   return{
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 const Home = ({ dataPopularMovie, dataNowPlaying, dataMovieTheater, dataTopMovie} : Props) => {
   const [dataCartoonMovie, setDataCartoonMovie] = useState<any>();
   useEffect(() => {
-    getCartoonMovie()
+    getCartoonMovie(1)
       .then(res => {
           setDataCartoonMovie(res.data.results)
       })
@@ -48,16 +48,16 @@ const Home = ({ dataPopularMovie, dataNowPlaying, dataMovieTheater, dataTopMovie
                 }
           })}
           settingSlide = {{
-                className: "center",
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                pauseOnHover: true,
-                speed: 1000,
-                centerMode:true,
-                slidesPerRow: 1
+              className: "center",
+              infinite: true,
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              autoplay: true,
+              autoplaySpeed: 3000,
+              pauseOnHover: true,
+              speed: 1000,
+              centerMode:true,
+              slidesPerRow: 1
           }}
       />
       <Slide 
@@ -115,12 +115,12 @@ const Home = ({ dataPopularMovie, dataNowPlaying, dataMovieTheater, dataTopMovie
                 }
           })}
           title = "Phim Chiếu Rạp"
-          post = "/"
+          post = "/movie-theater"
           settingSlide = {{
-                infinite: true,
-                speed: 500,
-                slidesToShow: 6,
-                slidesToScroll: 1
+              infinite: true,
+              speed: 500,
+              slidesToShow: 6,
+              slidesToScroll: 1
           }}
           tooltip = "Xem tất cả"
           icon = {<VscTriangleRight style={{
@@ -138,12 +138,12 @@ const Home = ({ dataPopularMovie, dataNowPlaying, dataMovieTheater, dataTopMovie
                 }
           })}
           title = "Phim Hoạt Hình"
-          post = "/"
+          post = "/cartoon"
           settingSlide = {{
-                infinite: true,
-                speed: 500,
-                slidesToShow: 6,
-                slidesToScroll: 1
+              infinite: true,
+              speed: 500,
+              slidesToShow: 6,
+              slidesToScroll: 1
           }}
           tooltip = "Xem tất cả"
           icon = {<VscTriangleRight style={{

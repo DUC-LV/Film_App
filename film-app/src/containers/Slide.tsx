@@ -31,6 +31,11 @@ const Slide = (props:DataSlide) => {
             <div className="container">
                     <Slider {...settingSlide}>
                         {dataSlide?.map((item:any,index) => {
+                            if(item.poster_path === null){
+                                return
+                                    
+                            }
+                            
                             return (
                                 <div className="movieItem" key={index} onClick = {() => {
                                         router.push({

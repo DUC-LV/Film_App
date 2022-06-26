@@ -2,48 +2,19 @@ import React, {useCallback, useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { convertSlug } from "../untils";
-import getLoadingMoreMovie from "../service/getLoadingMoreMovie";
-// export interface Data {
-//      image?:string,
-//      filmName?:string
-//      id?:any
-// }
-interface DataMovie {
-     // dataMovie?:Data[],
-    value?:any,
+type Props = {
     title?:string,
+    fetchData :() => void;
+    items?:any,
+    hasMore?:any,
 }
-const LoadingMoreMovie = (props: DataMovie) => {
-    const { title, value } = props;
+const LoadingMoreMovie = ({ title, fetchData, items, hasMore }:Props) => {
     const router = useRouter()
-    const [items, setItems] = useState<any>([])
-    const [page, setPage] = useState(value)
-    const [hasMore, setHasMore] = useState(true)
-    useEffect(() => {
-        getLoadingMoreMovie.getAll(page)
-        .then(res => {
-            if(res?.data?.results && res.data.results.length > 0){
-                    setItems(res.data.results)
-            }
-        })
-    },[])
-    const fetchData = useCallback(() => {
-        getLoadingMoreMovie.getAll(page).then(res => {
-            if(!page && !items){
-                    return
-            }
-            setItems([...items,...res.data.results])
-        })
-        if(items.length === 0 ){ 
-            setHasMore(false)
-        }
-        setPage(page+1)
-    }, [page, items]);
     return(
         <div className="container">
             <h2 className="title">{title}</h2>
             <InfiniteScroll
-                    dataLength={items.length}
+                    dataLength={items?.length}
                     next = {fetchData}
                     hasMore = {hasMore}
                     loader={<h4>Loading...</h4>}
@@ -51,6 +22,9 @@ const LoadingMoreMovie = (props: DataMovie) => {
                     <div className="container">
                         <div className="row m-6">
                             {items?.map((item:any,index:any) => {
+                                if(!item.poster_path){
+                                    return
+                                }
                             return(
                                 <img key={index} src = {`https://image.tmdb.org/t/p/w500`+item.poster_path} className = "img" onClick={() => {
                                         router.push({

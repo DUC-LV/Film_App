@@ -9,10 +9,13 @@ const Header = () => {
           if (!searchTxt) return;
           router.push({
                pathname : `/search`,
-               query:{"m":convertSlug(searchTxt)}
+               query:{"q":convertSlug(searchTxt)}
           })
      }, [searchTxt]);
      const router = useRouter()
+     // const getSunrise = (dt : number) => {
+     //      return `${new Date(dt * 1000).getHours()}h${new Date(dt * 1000).getMinutes()}`
+     // }
      return(
           <div className="navbar">
                <ul>

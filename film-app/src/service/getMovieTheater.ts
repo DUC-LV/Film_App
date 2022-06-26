@@ -1,8 +1,8 @@
 import instance from "../axiosClient";
 
 const getMovieTheater = {
-     getAll(){
-          const url = `upcoming?language=en-US&page=1`
+     getAll(page:any){
+          const url = `upcoming?language=en-US&page=${page}`
           return instance.get(url)
      }
 }
