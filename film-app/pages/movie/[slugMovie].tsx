@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState,useCallback } from "react";    
 import { useRouter } from "next/router"
 import getDetailMovie from "../../src/service/getDetailMovie";
@@ -37,14 +38,11 @@ const name = () => {
             setHasMore(false)
         }
         setPage(page+1)
-}, [page, items]);
-// {console.log(filmInformation?.budget.getH)}
-const a = new Date(filmInformation?.budget*1000)
-console.log(a.getHours()+"/"+a.getMinutes())
+}, [page, items,del.id]);
     return(
         <div className = "container">
             <div className = "container-left">
-                <Video />
+                <Video id = {Number(del.id)} />
             </div>
             <div className = "container-right">
                 

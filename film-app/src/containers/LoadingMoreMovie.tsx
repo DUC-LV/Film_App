@@ -5,8 +5,8 @@ import { convertSlug } from "../untils";
 type Props = {
     title?:string,
     fetchData :() => void;
-    items?:any,
-    hasMore?:any,
+    items?:Array<object>,
+    hasMore?:boolean,
 }
 const LoadingMoreMovie = ({ title, fetchData, items, hasMore }:Props) => {
     const router = useRouter()
@@ -14,9 +14,9 @@ const LoadingMoreMovie = ({ title, fetchData, items, hasMore }:Props) => {
         <div className="container">
             <h2 className="title">{title}</h2>
             <InfiniteScroll
-                    dataLength={items?.length}
+                    dataLength={Number(items?.length)}
                     next = {fetchData}
-                    hasMore = {hasMore}
+                    hasMore = {Boolean(hasMore)}
                     loader={<h4>Loading...</h4>}
             >
                     <div className="container">

@@ -8,14 +8,14 @@ import { convertSlug } from "../untils";
 export interface DataSlider {
     image?:string,
     filmName?:string
-    id?:any
+    id?:number,
 }
 interface DataSlide {
     dataSlide?:DataSlider[],
-    settingSlide?:any,
+    settingSlide?:object,
     title?:string,
-    post?:any,
-    tooltip?:any,
+    post?:string,
+    tooltip?:string,
     icon?:any
 }
 const Slide = (props:DataSlide) => {

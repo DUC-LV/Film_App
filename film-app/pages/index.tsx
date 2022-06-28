@@ -10,10 +10,10 @@ import getNowPlaying from "../src/service/getNowPlaying";
 import Slide from "../src/containers/Slide"
 import { VscTriangleRight } from 'react-icons/vsc'
 type Props = {
-  dataPopularMovie?:any,
-  dataTopMovie?:any,
-  dataMovieTheater?:any,
-  dataNowPlaying?:any,
+  dataPopularMovie?:Array<object>,
+  dataTopMovie?:Array<object>,
+  dataMovieTheater?:Array<object>,
+  dataNowPlaying?:Array<object>,
 }
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const resPopularMovie =await getPopularMovie.getAll() 

@@ -13,9 +13,6 @@ const Header = () => {
           })
      }, [searchTxt]);
      const router = useRouter()
-     // const getSunrise = (dt : number) => {
-     //      return `${new Date(dt * 1000).getHours()}h${new Date(dt * 1000).getMinutes()}`
-     // }
      return(
           <div className="navbar">
                <ul>
